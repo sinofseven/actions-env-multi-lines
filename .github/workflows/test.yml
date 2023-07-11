@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo $PRIVATE_KEY > key.txt
+      - run: |
+          echo "TMP_ENV<<:" >> $GITHUB_ENV
+          echo $PRIVATE_KEY >> $GITHUB_ENV
+          echo ":" >> $GITHUB_ENV
+      - run: echo $TMP_ENV > env.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: tmp_env
+          path: |
+            key.txt
+            env.txt
+
