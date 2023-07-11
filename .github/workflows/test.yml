@@ -12,6 +12,7 @@ jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
+      - run: echo 122333
       - run: echo $PRIVATE_KEY > key.txt
       - run: |
           echo "TMP_ENV<<:" >> $GITHUB_ENV
