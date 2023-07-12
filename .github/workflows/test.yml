@@ -49,4 +49,4 @@ jobs:
     steps:
       - run: echo "APP_ENV=itg" >> $GITHUB_ENV
       - run: echo success
-        if: env.APP_ENV == "itg"
+        if: env.APP_ENV == 'itg'
