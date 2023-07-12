@@ -8,6 +8,7 @@ on:
 env:
   PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
   TMP_SECRET: ${{ secrets.TMP_SECRET }}
+  TMP_BASE&4: ${{ secrets.TMP_BASE64 }}
 
 jobs:
   test:
@@ -25,6 +26,12 @@ jobs:
           echo "TMP_ENV<<:" >> $GITHUB_ENV
           echo $PRIVATE_KEY >> $GITHUB_ENV
           echo ":" >> $GITHUB_ENV
+      - run: echo $TMP_BASE64 | base64 -d > direct_base64.txt
+      - run: |
+          echo "ENV_BASE64<<:" >> $GITHUB_ENV
+          echo $TMP_BASE64 | base64 -d >> $GITHUB_ENV
+          echo ":" >> $GITHUB_ENV
+      - run: echo $ENV_BASE64 > env_base64.txt
       - run: echo $TMP_ENV > env.txt
       - uses: actions/upload-artifact@v3
         with:
@@ -34,3 +41,5 @@ jobs:
             env.txt
             env_secret_env.txt
             direct_secret_env.txt
+            env_base64.txt
+            direct_base64.txt
