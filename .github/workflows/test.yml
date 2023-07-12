@@ -8,7 +8,7 @@ on:
 env:
   PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
   TMP_SECRET: ${{ secrets.TMP_SECRET }}
-  TMP_BASE&4: ${{ secrets.TMP_BASE64 }}
+  TMP_BASE64: ${{ secrets.TMP_BASE64 }}
 
 jobs:
   test:
