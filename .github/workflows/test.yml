@@ -50,3 +50,5 @@ jobs:
       - run: echo "APP_ENV=itg" >> $GITHUB_ENV
       - run: echo success
         if: env.APP_ENV == 'itg'
+      - run: echo prd
+        if: env.APP_ENV == 'prd'
