@@ -43,3 +43,10 @@ jobs:
             direct_secret_env.txt
             env_base64.txt
             direct_base64.txt
+
+  condition_test:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "APP_ENV=itg" >> $GITHUB_ENV
+      - run: echo success
+        if: env.APP_ENV == "itg"
