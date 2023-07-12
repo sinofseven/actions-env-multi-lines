@@ -7,12 +7,19 @@ on:
 
 env:
   PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
+  TMP_SECRET: ${{ secrets.TMP_SECRET }}
 
 jobs:
   test:
     runs-on: ubuntu-22.04
     steps:
       - run: echo 122333
+      - run: echo $TMP_SECRET > direct_secret_env.txt
+      - run: |
+          echo "ENV_SECRET<<:" >> $GITHUB_ENV
+          echo $TMP_SECRET >> $GITHUB_ENV
+          echo ":" >> $GITHUB_ENV
+      - run: echo $ENV_SECRET > env_secret_env.txt
       - run: echo $PRIVATE_KEY > key.txt
       - run: |
           echo "TMP_ENV<<:" >> $GITHUB_ENV
@@ -25,4 +32,5 @@ jobs:
           path: |
             key.txt
             env.txt
-
+            env_secret_env.txt
+            direct_secret_env.txt
