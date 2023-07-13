@@ -33,7 +33,9 @@ jobs:
           echo ":" >> $GITHUB_ENV
       - run: echo $ENV_BASE64 > env_base64.txt
       - run: echo $TMP_ENV > env.txt
-      - run: echo ${{ secrets.TMP_BASE64 }} | base64 -d > secret_direct.txt
+      - run: echo $ENCODED_PRIVATE_KEY | base64 -d > secret_direct.txt
+        env:
+          ENCODED_PRIVATE_KEY: ${{ secrets.TMP_BASE64 }}
       - uses: actions/upload-artifact@v3
         with:
           name: tmp_env
