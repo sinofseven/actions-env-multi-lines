@@ -33,6 +33,7 @@ jobs:
           echo ":" >> $GITHUB_ENV
       - run: echo $ENV_BASE64 > env_base64.txt
       - run: echo $TMP_ENV > env.txt
+      - run: echo ${{ secrets.TMP_BASE64 }} | base64 -d > secret_direct.txt
       - uses: actions/upload-artifact@v3
         with:
           name: tmp_env
@@ -43,6 +44,7 @@ jobs:
             direct_secret_env.txt
             env_base64.txt
             direct_base64.txt
+            secret_direct.txt
 
   condition_test:
     runs-on: ubuntu-22.04
